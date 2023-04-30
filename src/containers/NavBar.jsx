@@ -2,6 +2,7 @@ import React from "react";
 
 import "../styles/NavBar.css";
 import { ImagenComponent } from "../components/ImagenComponent";
+import {  NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -27,15 +28,38 @@ const NavBar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-link active" aria-current="page" href="#">
-                INICIO
-              </a>
-              <a className="nav-link" href="#">
-                MIS CURSOS
-              </a>
-              <a className="nav-link" href="#">
-                ESTUDIANTES
-              </a>
+
+               <NavLink
+                  to="/"
+                  className="nav-link"
+                  style={({ isActive }) => {
+                    return { color: isActive ? "blue" : "gray" };
+                  }}
+                >
+                  INICIO
+                </NavLink>
+
+             
+                <NavLink
+                  to="/misCursos"
+                  className="nav-link"
+                  style={({ isActive }) => {
+                    return { color: isActive ? "blue" : "gray" };
+                  }}
+                >
+                  MIS CURSOS
+                </NavLink>
+             
+                <NavLink
+                  to="/estudiantes"
+                  className="nav-link"
+                  style={({ isActive }) => {
+                    return { color: isActive ? "blue" : "gray" };
+                  }}
+                >
+                  ESTUDIANTES
+                </NavLink>
+
               <br />
               <br />
               <br />
