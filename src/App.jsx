@@ -3,8 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './containers/NavBar'
-import Principal from './pages/Principal'
+import Academia from './pages/Academia'
 
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Estudiantes from './pages/Estudiantes'
+import MisCursos from './pages/MisCursos'
 function App() {
   //const [count, setCount] = useState(0)
 
@@ -31,18 +34,36 @@ function App() {
         Click on the Vite and React logos to learn more
       </p> */}
 
-    <div class="container text-center">
-      <div class="row align-items-start">
-        <div class="col-6">
-          <NavBar/>
+
+    <div className="container text-center">
+      <div className="row align-items-start">
+      <Router>
+        <div className="col-6">
+           <NavBar/>
         </div>
-        <div class="col-6">
-          <Principal/>
+
+        <div className="col-6">
+            <Routes>
+              <Route path="/" element={
+                <Academia/>
+              }/> 
+            </Routes>
+
+            <Routes>
+              <Route path="/estudiantes" element={
+                <Estudiantes/>
+              }/> 
+            </Routes>
+
+            <Routes>
+              <Route path="/misCursos" element={
+                <MisCursos/>
+              }/> 
+            </Routes>
         </div>
+      </Router>
       </div>
     </div>
-      
-      
     </>
   )
 }
