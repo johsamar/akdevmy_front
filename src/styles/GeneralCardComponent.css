@@ -1,0 +1,30 @@
+.column {
+    display: flex;
+    margin: 25px;
+    width: 400px;
+}
+
+.card-edit {
+    border: solid #FF0080 3px;
+}
+
+.card-edit img{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.card-edit-body{
+    text-align: center;
+}
+
+.card-edit-body h5{
+    font-size: 30px;
+    color: #FF8000;
+}
+
+.card-edit-body p{
+    font-size: 20px;
+    color: #A52019;
+}
