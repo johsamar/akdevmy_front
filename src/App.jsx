@@ -35,14 +35,14 @@ function App() {
       </p> */}
 
 
-    <div className="container text-center">
+    <div className="container m-0 mw-100 w-100 text-center">
       <div className="row align-items-start">
       <Router>
-        <div className="col-6">
+        <div className="col-auto">
            <NavBar/>
         </div>
 
-        <div className="col-6">
+        <div className="col">
             <Routes>
               <Route path="/" element={
                 <Academia/>
