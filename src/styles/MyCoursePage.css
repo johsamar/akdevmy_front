@@ -1,0 +1,26 @@
+.container-fluid {
+    text-align: center;
+    font-size: 50px;
+    padding-top: 20px;
+}
+
+.row{
+    margin: auto;
+}
+
+.rows-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+}
+
+.option-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.option-button{
+    margin: 20px;
+}

@@ -2,10 +2,12 @@ import React from "react";
 
 const ImagenComponent = ({ src, alt }) => {
   //Convertir su forma a cuadrada
-  const style = {};
+  const style = {
+    width: "200px"
+  };
 
   return (
-    <div className="ratio ratio-1x1">
+    <div>
       <img src={src} alt={alt} style={style} />
     </div>
   );
