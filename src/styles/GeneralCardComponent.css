@@ -5,7 +5,7 @@
 }
 
 .card-edit {
-    border: solid #FF0080 3px;
+    border: solid rgb(193, 191, 186) 3px;
 }
 
 .card-edit img{
@@ -21,10 +21,10 @@
 
 .card-edit-body h5{
     font-size: 30px;
-    color: #FF8000;
+    color: gray;
 }
 
 .card-edit-body p{
     font-size: 20px;
-    color: #A52019;
+    color: gray;
 }
