@@ -1,5 +1,6 @@
 .side-button {
-    display: block;    
+    display: flex;    
+    justify-content: center;
     width: 100%;
     background-color: rgb(193, 191, 186);
     text-decoration: none;
@@ -17,4 +18,10 @@
 
 .side-button-container {
     margin-top: 20px;
+    
+}
+
+.header-spacer{
+    display: flex;
+    flex: 1 1 auto;
 }

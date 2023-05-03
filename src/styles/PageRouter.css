@@ -2,7 +2,7 @@
     position: relative;
     height: 100vh;
     transition: margin-left .5s;
-    flex-grow: 2;
+    width: 100%;
 }
 
 .sidebar {

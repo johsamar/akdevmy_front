@@ -1,7 +1,19 @@
-.container-fluid {
+.containerPage {
     text-align: center;
     font-size: 50px;
     padding-top: 20px;
+}
+
+.inputBuscar{
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+
+.title-section-course{
+    color: grey;
 }
 
 .row{
@@ -11,7 +23,7 @@
 .rows-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: start;
+    justify-content: center;
 }
 
 .option-buttons{
@@ -23,4 +35,14 @@
 
 .option-button{
     margin: 20px;
+}
+
+.modalCreateCourses{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#description{
+    padding-bottom: 50px;
 }

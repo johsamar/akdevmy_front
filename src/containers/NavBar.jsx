@@ -26,6 +26,13 @@ const NavBar = () => {
           <NavLink to="/estudiantes" className="side-button btn">
             ESTUDIANTES
           </NavLink>
+
+          <span className="header-spacer">
+          </span>
+
+          <NavLink to="/" className="side-button btn">
+            Cerrar sesion
+          </NavLink>
         </div>
       </div>
     </>
