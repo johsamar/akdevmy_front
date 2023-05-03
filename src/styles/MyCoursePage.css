@@ -36,3 +36,13 @@
 .option-button{
     margin: 20px;
 }
+
+.modalCreateCourses{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#description{
+    padding-bottom: 50px;
+}

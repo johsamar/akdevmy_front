@@ -16,7 +16,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.11.0"
+    "react-router-dom": "^6.11.0",
+    "reactstrap": "^9.1.9"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
