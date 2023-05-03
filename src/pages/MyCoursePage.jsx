@@ -61,6 +61,7 @@ const MyCoursePage = () => {
                 <GeneralCardComponent
                   key={course.courseId}
                   singleElement={course}
+                  options={"actions"}
                 />
               );
             })}

@@ -6,17 +6,18 @@ import NavBar from "../containers/NavBar";
 import "../styles/PageRouter.css";
 import { useState } from "react";
 import { MdArrowCircleLeft, MdArrowCircleRight } from "react-icons/md";
+import CourseDetailsPage from "../pages/CourseDetailsPage";
 
 function PageRouter() {
   const [showSideBar, setShowSideBar] = useState(true);
 
   const iconStyle = {
     width: "50px",
-    height: "50px"
-  }
+    height: "50px",
+  };
 
   const changeSideBarStatus = () => {
-    setShowSideBar(!showSideBar)
+    setShowSideBar(!showSideBar);
   };
 
   return (
@@ -25,33 +26,35 @@ function PageRouter() {
         <div className="principal-container">
           <div
             className="sidebar"
-            style={showSideBar ? {width: "20%"} : {width: "0%"} }
+            style={showSideBar ? { width: "20%" } : { width: "0%" }}
           >
             <NavBar />
           </div>
-          
-          <div 
+
+          <div
             className="routes overflow-auto"
-            style={showSideBar ? {marginLeft: "20%"} : {marginRight: "0%"} }
+            style={showSideBar ? { marginLeft: "20%" } : { marginRight: "0%" }}
           >
-            <button
-              className="hidden-button btn"
-              onClick={changeSideBarStatus}
-            >
-              {
-                showSideBar 
-                  ? <MdArrowCircleLeft style={iconStyle} />
-                  : <MdArrowCircleRight style={iconStyle} /> 
-              }
+            <button className="hidden-button btn" onClick={changeSideBarStatus}>
+              {showSideBar ? (
+                <MdArrowCircleLeft style={iconStyle} />
+              ) : (
+                <MdArrowCircleRight style={iconStyle} />
+              )}
             </button>
             <Routes>
               <Route path="/" element={<Academia />} />
               <Route path="/estudiantes" element={<Estudiantes />} />
-              <Route path="/misCursos" element={<MyCoursePage />} />
+              <Route path="/misCursos" element={<MyCoursePage />}></Route>
+              {/* Esta ruta sirve para ver los detalles del curso */}
+              <Route
+                path="/misCursos/:idCourse"
+                element={<CourseDetailsPage />}
+              />
               <Route path="*" element={<h1>Not Found 404</h1>} />
             </Routes>
           </div>
-        </div>        
+        </div>
       </Router>
     </>
   );
