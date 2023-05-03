@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { GeneralCardComponent } from "../components/GeneralCardComponent";
 import { getCourses } from "../services/courseService";
-import "../styles/MyCoursePage.css";
 
 const MyCoursePage = () => {
   const [courses, setCourses] = useState([]);
@@ -9,7 +8,6 @@ const MyCoursePage = () => {
   const getCharacterFromService = async () => {
     let coursesList = await getCourses();
     setCourses(coursesList.data);
-    console.log(coursesList.data); //! to delete
   };
 
   useEffect(() => {
@@ -27,7 +25,13 @@ const MyCoursePage = () => {
         <div className="rows-container">
           {courses &&
             courses.map((course) => {
-              return <GeneralCardComponent key={course.courseId} singleElement={course} />;
+              return (
+                <GeneralCardComponent
+                  key={course.idCourse}
+                  singleElement={course}
+                  options={"actions"}
+                />
+              );
             })}
         </div>
 

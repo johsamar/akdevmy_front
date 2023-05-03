@@ -9,55 +9,55 @@ const getCourses = async () => {
             {
                 "name": "Curso de ingles",
                 "description": "Curso de ingles para hispanohablantes",
-                "idCourse": "",
+                "idCourse": "1",
                 "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png"
             },
             {
                 "name": "Curso de español",
                 "description": "Curso de ESPAÑOL",
-                "idCourse": "",
+                "idCourse": "2",
                 "imageUrl": "https://www.freecodecamp.org/news/content/images/2023/04/JavaScript-Blog-Cover.png"
             },
             {
                 "name": "Curso de JavaScript",
                 "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                "idCourse": "",
+                "idCourse": "3",
                 "imageUrl": "https://www.20i.com/blog/wp-content/uploads/2020/10/I-love-JavaScript.png"
             },
             {
                 "name": "Curso de React",
                 "description": "",
-                "idCourse": "",
+                "idCourse": "4",
                 "imageUrl": "https://www.cloudstudio.mx/blog/wp-content/uploads/2019/01/js.png"
             },
             {
                 "name": "Curso de React",
                 "description": "",
-                "idCourse": "asdasdasdads sdasd",
+                "idCourse": "5",
                 "imageUrl": "https://www.cloudstudio.mx/blog/wp-content/uploads/2019/01/js.png"
             },
             {
                 "name": "Curso de React",
                 "description": "",
-                "idCourse": "asdasdasdads sdasd",
+                "idCourse": "6",
                 "imageUrl": "https://www.cloudstudio.mx/blog/wp-content/uploads/2019/01/js.png"
             },
             {
                 "name": "Curso de React",
                 "description": "",
-                "idCourse": "asdasdasdads sdasd",
+                "idCourse": "7",
                 "imageUrl": "https://www.cloudstudio.mx/blog/wp-content/uploads/2019/01/js.png"
             },
             {
                 "name": "Curso de React",
                 "description": "",
-                "idCourse": "asdasdasdads sdasd",
+                "idCourse": "8",
                 "imageUrl": "https://www.cloudstudio.mx/blog/wp-content/uploads/2019/01/js.png"
             },
             {
                 "name": "Curso de React",
                 "description": "",
-                "idCourse": "asdasdasdads sdasd",
+                "idCourse": "9",
                 "imageUrl": "https://www.cloudstudio.mx/blog/wp-content/uploads/2019/01/js.png"
             }
         ]
