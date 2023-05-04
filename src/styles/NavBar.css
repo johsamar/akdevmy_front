@@ -1,11 +1,27 @@
-@media screen and (min-width:992px){
+.side-button {
+    display: flex;    
+    justify-content: center;
+    width: 100%;
+    background-color: rgb(193, 191, 186);
+    text-decoration: none;
+    color: grey;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
 
-    .navbar .container-fluid, .navbar-expand-lg .navbar-collapse, .navbar-expand-lg .navbar-nav{
-        flex-direction: column;
-    }
+.sidebar-container {
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(227, 226, 223);
+    height: 100%;
+}
 
-    .navbar{
-        height: 100vh;
-    }
+.side-button-container {
+    margin-top: 20px;
     
+}
+
+.header-spacer{
+    display: flex;
+    flex: 1 1 auto;
 }

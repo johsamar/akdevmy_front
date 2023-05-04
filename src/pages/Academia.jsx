@@ -56,7 +56,9 @@ const Academia = () => {
                             </div>
                         </div>
                         <div className="row d-flex justify-content-end">
-                            <button type="button" className="btn btn-primary button-edit me-2">Editar</button>
+                            <div className="col-2 d-flex justify-content-end">
+                            <button type="button" className="btn btn-primary button-edit m-0">Editar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
