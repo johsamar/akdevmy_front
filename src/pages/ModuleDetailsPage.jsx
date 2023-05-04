@@ -14,7 +14,7 @@ const ModuleDetailsPage = () => {
 
   useEffect(() => {
     getModule();
-    console.log(module.classes);
+    
   }, []);
 
   return (
@@ -22,6 +22,7 @@ const ModuleDetailsPage = () => {
       <div className="containerPage">
         {/* module */}
         <p className="title-section-course">{module.name}</p>
+       
         <button type="button" className="btn btn-primary ">
           Crear Clase
         </button>
@@ -47,7 +48,10 @@ const ModuleDetailsPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                
+                {
+                    console.log(module.classes)
+
+                }
                 </tbody>
               </table>
             </div>
