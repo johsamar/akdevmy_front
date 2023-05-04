@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import { GeneralCardComponent } from "../components/GeneralCardComponent";
 import { getCourses } from "../services/courseService";
 import "../styles/MyCoursePage.css";
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from "reactstrap"
-import { AiFillPlusCircle } from "react-icons/ai"
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+  Input,
+  Label,
+} from "reactstrap";
+import { AiFillPlusCircle } from "react-icons/ai";
 //import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -34,15 +43,15 @@ const MyCoursePage = () => {
     setFilteredCourses(filter);
   };
 
-  const changeModalState=()=>{
-    setModal(!modal)
-  }
+  const changeModalState = () => {
+    setModal(!modal);
+  };
 
   const createCourse = async (data) => {
     console.log("creado con data: ");
     console.log(data);
     reset();
-  }
+  };
 
   const {
     register,
@@ -74,7 +83,7 @@ const MyCoursePage = () => {
             filteredCourses.map((course) => {
               return (
                 <GeneralCardComponent
-                  key={course.courseId}
+                  key={course.idCourse}
                   singleElement={course}
                   options={"actions"}
                 />
@@ -83,22 +92,19 @@ const MyCoursePage = () => {
         </div>
 
         {/* add course button */}
-        <Button href="#" className="btn-flotante"
-        onClick= {changeModalState}>
+        <Button href="#" className="btn-flotante" onClick={changeModalState}>
           {/* Add course icon */}
-          <AiFillPlusCircle className="addCourseIcon"/>
+          <AiFillPlusCircle className="addCourseIcon" />
         </Button>
 
         <Modal className="modalCreateCourses" isOpen={modal}>
-          <ModalHeader>
-            Nuevo curso
-          </ModalHeader>
+          <ModalHeader>Nuevo curso</ModalHeader>
 
           <ModalBody>
             <form onSubmit={handleSubmit(createCourse)}>
               <FormGroup>
                 <Label for="name">Nombre del curso</Label>
-                <input 
+                <input
                   type="text"
                   id="name"
                   className="form-control z-depth-1"
@@ -143,8 +149,8 @@ const MyCoursePage = () => {
 
               <FormGroup>
                 <Label for="imageUrl">Imagen url</Label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   id="imageUrl"
                   className="form-control z-depth-1"
                   placeholder="Escribe la url de la imagen del curso aquí..."
@@ -162,15 +168,16 @@ const MyCoursePage = () => {
                   </div>
                 )}
               </FormGroup>
-              <Button type="submit" color="primary" style={{width: "100%"}}>Crear curso</Button>
+              <Button type="submit" color="primary" style={{ width: "100%" }}>
+                Crear curso
+              </Button>
             </form>
-          
-
           </ModalBody>
 
           <ModalFooter>
-            
-            <Button color="secondary" onClick={changeModalState}>Cerrar</Button>
+            <Button color="secondary" onClick={changeModalState}>
+              Cerrar
+            </Button>
           </ModalFooter>
         </Modal>
       </div>
