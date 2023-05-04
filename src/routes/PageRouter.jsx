@@ -7,6 +7,7 @@ import "../styles/PageRouter.css";
 import { useState } from "react";
 import { MdArrowCircleLeft, MdArrowCircleRight } from "react-icons/md";
 import CourseDetailsPage from "../pages/CourseDetailsPage";
+import ModuleDetailsPage from "../pages/ModuleDetailsPage";
 
 function PageRouter() {
   const [showSideBar, setShowSideBar] = useState(true);
@@ -50,6 +51,11 @@ function PageRouter() {
               <Route
                 path="/misCursos/:idCourse"
                 element={<CourseDetailsPage />}
+              />
+              {/* Esta ruta dirige al detalle del modulo */}
+              <Route
+                path="/module/:idModule"
+                element={<ModuleDetailsPage/>}
               />
               <Route path="*" element={<h1>Not Found 404</h1>} />
             </Routes>

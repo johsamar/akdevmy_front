@@ -3,18 +3,33 @@ const modulesList = [
     id: 1,
     name: "Módulo 1 - Introducción Curso de ingles",
     description: "Sint do ut nostrud quis culpa ea veniam eu esse.",
-    classes: {
-      _id: "",
-      type: "",
-      name: "",
-      description: "",
-      duration: "",
-      url: "",
-      image: "",
-      video: "",
-      document: "",
-      position: "",
-    },
+    classes: [
+      {
+        _id: "1",
+        type: "video",
+        name: "ingles 1",
+        description: "Este es el curso de ingles 1",
+        duration: "20 horas",
+        url: "",
+        image: "",
+        video: "",
+        document: "",
+        position: 1
+      },
+      {
+        _id: "2",
+        type: "pdf",
+        name: "ingles 2",
+        description: "Este es el curso de ingles 2",
+        duration: "2 horas",
+        url: "",
+        image: "",
+        video: "",
+        document: "",
+        position: 1
+      }
+     
+    ],
     idCourse: 1,
   },
   {
@@ -168,7 +183,7 @@ const modulesList = [
   },
   {
     id: 10,
-    name: "Módulo 1 - Introducción a la programación",
+    name: "Módulo 2 - Introducción a la programación",
     description:
       "Nisi culpa sint tempor id. Lorem in laboris culpa consectetur.",
     classes: {
@@ -191,12 +206,16 @@ const getModules = async () => {
   return modulesList;
 };
 
+const findModuleByIdCurso = (idCurso) => {
+  return modulesList.find((module) => module.idCourse == idCurso);
+};
+
+const filterModuleByIdCurso = (idCurso) => {
+  return modulesList.filter((module) => module.idCourse == idCurso);
+};
+
 const findModuleById = (id) => {
-  return modulesList.find((module) => module.idCourse == id);
+  return modulesList.find((module) => module.id == id);
 };
 
-const filterModuleById = (id) => {
-  return modulesList.filter((module) => module.idCourse == id);
-};
-
-export { getModules, findModuleById, filterModuleById };
+export { getModules, findModuleByIdCurso, filterModuleByIdCurso, findModuleById };

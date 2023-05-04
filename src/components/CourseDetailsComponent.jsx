@@ -3,9 +3,13 @@ import { useParams } from "react-router-dom";
 import { getCourses } from "../services/courseService";
 import { FaPlusCircle } from "react-icons/fa";
 import { GeneralCardComponent } from "./GeneralCardComponent";
-import { filterModuleById } from "../services/moduleService";
+import { filterModuleByIdCurso } from "../services/moduleService";
 
 const CourseDetailsComponent = () => {
+
+
+
+
   // Id of the course received by url, it will be used later to add the modules of the course
   const { idCourse } = useParams();
   const [courses, setCourses] = useState([]);
@@ -25,7 +29,7 @@ const CourseDetailsComponent = () => {
 
   // Show only the modules of this course
   const getModulesFromService = async () => {
-    const tempModuleList = filterModuleById(idCourse);
+    const tempModuleList = filterModuleByIdCurso(idCourse);
     setModules(tempModuleList);
   };
 

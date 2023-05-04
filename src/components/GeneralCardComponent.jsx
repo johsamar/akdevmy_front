@@ -14,6 +14,11 @@ const GeneralCardComponent = ({ singleElement, options }) => {
     navigate(`/misCursos/${course.idCourse}`);
   };
 
+  const manageModule = () => {
+    const module = { ...singleElement };
+    navigate(`/module/${module.id}`);
+  };
+
   return (
     <>
       <div className="column">
@@ -53,7 +58,7 @@ const GeneralCardComponent = ({ singleElement, options }) => {
               </div>
             ) : (
               <div className="d-flex justify-content-end">
-                <button className="btn btn-primary">{options}</button>
+                <button className="btn btn-primary" onClick={manageModule}>{options}</button>
               </div>
             )}
           </div>

@@ -84,6 +84,7 @@ const MyCoursePage = () => {
 
         {/* add course button */}
         <Button href="#" className="btn-flotante"
+        
         onClick= {changeModalState}>
           {/* Add course icon */}
           <AiFillPlusCircle className="addCourseIcon"/>
