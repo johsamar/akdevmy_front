@@ -3,6 +3,13 @@ import { environment } from "../config/environment";
 import { FaReadme, FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
+/**
+ *
+ * @param options: This property affects the visibility of the button:
+ *                 - If it has the value "actions" it will paint the buttons with the options to read, modify and manage.
+ *                 - If it has a word, the word will be painted on the button.
+ *                 - If it does not have anything, the button will not be rendered.
+ */
 const GeneralCardComponent = ({ singleElement, options }) => {
   const navigate = useNavigate();
   /**
@@ -52,9 +59,11 @@ const GeneralCardComponent = ({ singleElement, options }) => {
                 </span>
               </div>
             ) : (
-              <div className="d-flex justify-content-end">
-                <button className="btn btn-primary">{options}</button>
-              </div>
+              options && (
+                <div className="d-flex justify-content-end">
+                  <button className="btn btn-primary">{options}</button>
+                </div>
+              )
             )}
           </div>
         </div>
