@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCourses } from "../services/courseService";
-import { FaPlusCircle } from "react-icons/fa";
 import { GeneralCardComponent } from "./GeneralCardComponent";
 import { filterModuleById } from "../services/moduleService";
+import { Button } from "reactstrap";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 const CourseDetailsComponent = () => {
   // Id of the course received by url, it will be used later to add the modules of the course
@@ -60,9 +61,9 @@ const CourseDetailsComponent = () => {
 
         {/* Add Module Button */}
         <div className="position-absolute bottom-0 end-0 m-5">
-          <span className="text-primary card-edit-actions">
-            <FaPlusCircle />
-          </span>
+          <Button href="#" className="btn-flotante">
+            <AiFillPlusCircle className="addCourseIcon" />
+          </Button>
         </div>
       </div>
     </>
