@@ -20,6 +20,10 @@ const GeneralCardComponent = ({ singleElement, options }) => {
     const course = { ...singleElement };
     navigate(`/misCursos/${course.idCourse}`);
   };
+  const manageModule = () => {
+    const module = { ...singleElement };
+    navigate(`/module/${module.id}`);
+  };
 
   return (
     <>
@@ -61,7 +65,7 @@ const GeneralCardComponent = ({ singleElement, options }) => {
             ) : (
               options && (
                 <div className="d-flex justify-content-end">
-                  <button className="btn btn-primary">{options}</button>
+                  <button className="btn btn-primary" onClick={manageModule}>{options}</button>
                 </div>
               )
             )}
