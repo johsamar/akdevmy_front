@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import PropTypes from "prop-types";
+import { environment } from "../config/environment";
 
 /**
  * 
@@ -23,7 +24,7 @@ const InputArticleComponent = ({ addArticle, initialValue }) => {
 
   return (
     <Editor
-      apiKey="060bmtk3hs231s8vk9rw1k20c3bx7gjs2anymf4e3t99h794"
+      apiKey={environment.articleApiKey}
       initialValue={initialValue}
       value={article}
       init={{
