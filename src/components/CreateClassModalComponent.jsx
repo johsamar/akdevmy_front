@@ -12,6 +12,8 @@ import Select from "react-select";
 import { useState } from "react";
 import { ExternalLinkComponent } from "./ExternalLinkComponent";
 import InputArticleComponent from "./InputArticleComponent";
+import FileUploader from "./FileComponent";
+import DragDropFile from "./MultimediaComponent";
 
 const CreateClassModalComponent = ({
   modalVisibility,
@@ -41,10 +43,10 @@ const CreateClassModalComponent = ({
   const changeChoice = (choice) => {
     switch (choice.value) {
       case "1":
-        setComponentToRender(<h1>Documento aun no implementado</h1>);
+        setComponentToRender(<FileUploader />);
         break;
       case "2":
-        setComponentToRender(<h1>Multimedia aun no implementado</h1>);
+        setComponentToRender(<DragDropFile />);
         break;
       case "3":
         setComponentToRender(<ExternalLinkComponent />);
@@ -91,9 +93,9 @@ const CreateClassModalComponent = ({
                 </div>
               )}
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="form-group shadow-textarea">
               <Label for="description">Descripción</Label>
-              <input
+              <textarea
                 type="text"
                 id="description"
                 className="form-control z-depth-1"
@@ -101,8 +103,8 @@ const CreateClassModalComponent = ({
                 {...register("description", {
                   required: "la descripción de la clase es requerida",
                   minLength: {
-                    value: 1,
-                    message: "la longitud mínima es 1",
+                    value: 5,
+                    message: "la longitud mínima es 5",
                   },
                 })}
               />
