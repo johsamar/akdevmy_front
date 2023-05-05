@@ -49,7 +49,8 @@ const ModuleDetailsPage = () => {
                 </thead>
                 <tbody>
                 {
-                    console.log(module.classes)
+                    console.log(module.classes) 
+                    
 
                 }
                 </tbody>
