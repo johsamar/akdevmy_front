@@ -11,11 +11,6 @@ import CourseDetailsPage from "../pages/CourseDetailsPage";
 function PageRouter() {
   const [showSideBar, setShowSideBar] = useState(true);
 
-  const iconStyle = {
-    width: "50px",
-    height: "50px",
-  };
-
   const changeSideBarStatus = () => {
     setShowSideBar(!showSideBar);
   };
@@ -35,11 +30,11 @@ function PageRouter() {
             className="routes overflow-auto"
             style={showSideBar ? { marginLeft: "20%" } : { marginRight: "0%" }}
           >
-            <button className="hidden-button btn" onClick={changeSideBarStatus}>
+            <button href="#" className="hidden-button btn" onClick={changeSideBarStatus}>
               {showSideBar ? (
-                <MdArrowCircleLeft style={iconStyle} />
+                <MdArrowCircleLeft className="arrowIcon" />
               ) : (
-                <MdArrowCircleRight style={iconStyle} />
+                <MdArrowCircleRight className="arrowIcon" />
               )}
             </button>
             <Routes>
