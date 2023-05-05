@@ -1,5 +1,3 @@
-import React from "react";
-
 import "../styles/NavBar.css";
 import { ImagenComponent } from "../components/ImagenComponent";
 import { NavLink } from "react-router-dom";
@@ -31,7 +29,7 @@ const NavBar = () => {
           </span>
 
           <NavLink to="/" className="side-button btn">
-            Cerrar sesion
+            Cerrar sesión
           </NavLink>
         </div>
       </div>
