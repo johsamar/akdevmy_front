@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { findModuleByid } from "../services/moduleService";
+import { AiFillDelete, AiOutlineEdit, AiOutlineSearch } from "react-icons/ai";
 
 const ModuleDetailsPage = () => {
   const { idModule } = useParams();
@@ -38,8 +39,8 @@ const ModuleDetailsPage = () => {
             <div className="col-2"></div>
             <div className="col-8">
             {/* TABLA DE CLASES */}
-            <table className="table  h4">
-                <thead className="thead-dark">
+            <table className="table table-striped">
+                <thead className="thead-dark h4">
                   <tr className="text-center">
                     <th scope="col">Nombre clase</th>
                     <th scope="col">ver</th>
@@ -48,11 +49,23 @@ const ModuleDetailsPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {
-                    console.log(module.classes) 
-                    
 
-                }
+                {!module.classes ?(
+                                <h1>CARGANDO CLASES ...</h1>
+                            ) : (
+                              module.classes.map((clase1)=>{
+                                    return(
+                                      <tr className="text-center h6">
+                                        <th scope="col">{clase1.name}</th>
+                                        <th scope="col"><AiOutlineSearch/></th>
+                                        <th scope="col"><AiOutlineEdit/></th>
+                                        <th scope="col"><AiFillDelete/></th>
+                                      </tr>
+                                        
+                                    );
+                                })
+                            )
+                        }
                 </tbody>
               </table>
             </div>
