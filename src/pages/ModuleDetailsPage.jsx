@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { findModuleByid } from "../services/moduleService";
 import { AiFillDelete, AiOutlineEdit, AiOutlineSearch } from "react-icons/ai";
+import UpdateClassComponent from "../components/modalsModule/UpdateClassComponent";
+import ReadClassComponent from "../components/modalsModule/ReadClassComponent";
+import DeleteClassComponent from "../components/modalsModule/DeleteClassComponent";
 
 const ModuleDetailsPage = () => {
   const { idModule } = useParams();
@@ -57,9 +60,21 @@ const ModuleDetailsPage = () => {
                                     return(
                                       <tr className="text-center h6">
                                         <th scope="col">{clase1.name}</th>
-                                        <th scope="col"><AiOutlineSearch/></th>
-                                        <th scope="col"><AiOutlineEdit/></th>
-                                        <th scope="col"><AiFillDelete/></th>
+                                        <th scope="col">
+                                          <ReadClassComponent
+                                          clase1 = {clase1}
+                                          />
+                                        </th>
+                                        <th scope="col">
+                                        <UpdateClassComponent
+                                          clase1 = {clase1}
+                                        />
+                                        </th>
+                                        <th scope="col">
+                                            <DeleteClassComponent
+                                            clase1 = {clase1}
+                                            />
+                                        </th>
                                       </tr>
                                         
                                     );
