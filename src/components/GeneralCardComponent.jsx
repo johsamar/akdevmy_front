@@ -2,6 +2,7 @@ import "../styles/GeneralCardComponent.css";
 import { environment } from "../config/environment";
 import { FaReadme, FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { VscDashboard } from "react-icons/vsc";
 
 /**
  *
@@ -55,7 +56,7 @@ const GeneralCardComponent = ({ singleElement, options }) => {
                   <FaRegEdit />
                 </span>
                 <span className="card-edit-actions" onClick={manageCourse}>
-                  M
+                  <VscDashboard />
                 </span>
               </div>
             ) : (
