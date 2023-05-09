@@ -60,7 +60,7 @@ const modulesList = [
       image: "",
       video: "",
       document: "",
-      position: 1,
+      position: 1,  
     }
   ],
     idCourse: 2,
