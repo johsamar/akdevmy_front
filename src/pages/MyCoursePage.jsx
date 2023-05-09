@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GeneralCardComponent } from "../components/GeneralCardComponent";
-import { getCourses } from "../services/courseService";
+import { getCourses, createCourseAsync } from "../services/courseService";
 import "../styles/MyCoursePage.css";
 import {
   Button,
@@ -37,7 +37,6 @@ const MyCoursePage = () => {
 
   const handleChange = (e) => {
     let textToFilter = e.target.value;
-    //console.log(e.target.value);
 
     const filter = courses.filter((course) =>
       course.name.toLowerCase().includes(textToFilter.toLowerCase())
@@ -55,10 +54,20 @@ const MyCoursePage = () => {
     setModalCreateClass(!modalCreateClass);
   };
 
-  const createCourse = async (data) => {
-    console.log("creado con data: ");
-    console.log(data);
-    reset();
+  const createCourse = async (data) => {    
+    try {
+      let response = await createCourseAsync({body: data})
+      //* close modal if response is success
+      changeModalState();
+      //* Set new course to the courses list
+      courses.push(response.data.data);
+      //* Reset filtered courses
+      setFilteredCourses(courses);
+      //* Reset form data
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const {

@@ -30,7 +30,7 @@ const modulesList = [
       }
      
     ],
-    idCourse: 1,
+    idCourse: "64554880dcdfba090ad9bc80",
   },
   {
     id: 2,
