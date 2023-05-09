@@ -15,20 +15,16 @@ import {
 import { AiFillPlusCircle } from "react-icons/ai";
 //import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
-//! TO DELETE LATER
-import { CreateClassModalComponent } from "../components/CreateClassModalComponent";
 
 const MyCoursePage = () => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [modal, setModal] = useState(false);
-  const [modalCreateClass, setModalCreateClass] = useState(false); // ! TO DELETE LATER
+  const [modal, setModal] = useState(false); //* modalVisibility
 
   const getCoursesFromService = async () => {
     let coursesList = await getCourses();
     setCourses(coursesList.data);
     setFilteredCourses(coursesList.data);
-    console.log(coursesList.data); //! to delete
   };
 
   useEffect(() => {
@@ -45,13 +41,9 @@ const MyCoursePage = () => {
     setFilteredCourses(filter);
   };
 
+  //* changeModalVisibility
   const changeModalState = () => {
     setModal(!modal);
-  };
-
-  //! Temp, TO DELETE LATER
-  const changeCreateClassModal = () => {
-    setModalCreateClass(!modalCreateClass);
   };
 
   const createCourse = async (data) => {    
@@ -108,18 +100,6 @@ const MyCoursePage = () => {
             })}
         </div>
 
-        <CreateClassModalComponent
-          modalVisibility={modalCreateClass}
-          changeModalVisibility={changeCreateClassModal}
-        />
-        {/* TO DELETE: Temp button to open create class modal */}
-        <Button
-          className="btn-flotante btn-modal-temp"
-          onClick={changeCreateClassModal}
-        >
-          {/* Add course icon */}
-          <AiFillPlusCircle className="addCourseIcon" />
-        </Button>
         {/* add course button */}
         <Button className="btn-flotante" onClick={changeModalState}>
           {/* Add course icon */}
