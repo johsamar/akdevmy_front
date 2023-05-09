@@ -18,7 +18,7 @@ const GeneralCardComponent = ({ singleElement, options }) => {
 
   const manageCourse = () => {
     const course = { ...singleElement };
-    navigate(`/misCursos/${course.idCourse}`);
+    navigate(`/misCursos/${course.id}`);
   };
   const manageModule = () => {
     const module = { ...singleElement };

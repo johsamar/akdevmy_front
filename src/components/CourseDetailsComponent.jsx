@@ -19,7 +19,7 @@ const CourseDetailsComponent = () => {
   const getCoursesFromService = async () => {
     const coursesList = await getCourses();
     const tempCourse = coursesList.data.find(
-      (element) => (element.idCourse = idCourse)
+      (element) => (element.id = idCourse)
     );
     setCourses(tempCourse);
   };
