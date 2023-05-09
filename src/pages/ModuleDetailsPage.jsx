@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { findModuleByid } from "../services/moduleService";
-import { AiFillDelete, AiOutlineEdit, AiOutlineSearch } from "react-icons/ai";
 import UpdateClassComponent from "../components/modalsModule/UpdateClassComponent";
 import ReadClassComponent from "../components/modalsModule/ReadClassComponent";
 import DeleteClassComponent from "../components/modalsModule/DeleteClassComponent";
+import { CreateClassModalComponent } from "../components/CreateClassModalComponent";
+//import { Button } from "reactstrap";
 
 const ModuleDetailsPage = () => {
   const { idModule } = useParams();
 
   const [module, setModule] = useState(idModule);
+  const [modalCreateClass, setModalCreateClass] = useState(false); //* modalVisibility
 
   async function getModule() {
     const moduleFind = findModuleByid(Number(idModule));
@@ -21,13 +23,18 @@ const ModuleDetailsPage = () => {
     
   }, []);
 
+  //* changeModalVisibility
+  const changeCreateClassModal = () => {
+    setModalCreateClass(!modalCreateClass);
+  };
+
   return (
     <>
       <div className="containerPage">
         {/* module */}
         <p className="title-section-course">{module.name}</p>
        
-        <button type="button" className="btn btn-primary ">
+        <button type="button" className="btn btn-primary " onClick={changeCreateClassModal}>
           Crear Clase
         </button>
         &nbsp; &nbsp; &nbsp;
@@ -88,6 +95,11 @@ const ModuleDetailsPage = () => {
           </div>
         </div>
       </div>
+      {/* CreateClassModal */}
+      <CreateClassModalComponent
+          modalVisibility={modalCreateClass}
+          changeModalVisibility={changeCreateClassModal}
+        />
     </>
   );
 };
