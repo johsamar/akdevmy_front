@@ -29,32 +29,19 @@ const CreateClassModalComponent = ({
     reset,
   } = useForm();
 
-  const options = [
-    { value: "1", label: "Documento" },
-    { value: "2", label: "Multimedia" },
-    { value: "3", label: "Enlace externo" },
-    { value: "4", label: "Articulo" },
-  ];
-
   const addArticle = (newArticle) => {
     setArticle(newArticle);
   };
 
+  const options = [
+    { value: <FileUploader />, label: "Documento" },
+    { value: <DragDropFile />, label: "Multimedia" },
+    { value: <ExternalLinkComponent />, label: "Enlace externo" },
+    { value: <InputArticleComponent addArticle={addArticle} />, label: "Articulo" },
+  ];
+
   const changeChoice = (choice) => {
-    switch (choice.value) {
-      case "1":
-        setComponentToRender(<FileUploader />);
-        break;
-      case "2":
-        setComponentToRender(<DragDropFile />);
-        break;
-      case "3":
-        setComponentToRender(<ExternalLinkComponent />);
-        break;
-      case "4":
-        setComponentToRender(<InputArticleComponent addArticle={addArticle} />);
-        break;
-    }
+    setComponentToRender(choice.value)
   };
 
   return (

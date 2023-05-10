@@ -44,6 +44,7 @@ const MyCoursePage = () => {
   //* changeModalVisibility
   const changeModalState = () => {
     setModal(!modal);
+    reset()
   };
 
   const createCourse = async (data) => {    
