@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCourses } from "../services/courseService";
 import { GeneralCardComponent } from "./GeneralCardComponent";
-import { filterModuleById } from "../services/moduleService";
 import { Button } from "reactstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { getModules } from "../services/ModulesService";
 
 const CourseDetailsComponent = () => {
   // Id of the course received by url, it will be used later to add the modules of the course
@@ -26,7 +26,10 @@ const CourseDetailsComponent = () => {
 
   // Show only the modules of this course
   const getModulesFromService = async () => {
-    const tempModuleList = filterModuleById(idCourse);
+    const moduleList = await getModules();
+    const tempModuleList = moduleList.filter(
+      (module) => module.idCourse == idCourse
+    );
     setModules(tempModuleList);
   };
 
@@ -51,7 +54,7 @@ const CourseDetailsComponent = () => {
             modules.map((module) => {
               return (
                 <GeneralCardComponent
-                  key={module.id}
+                  key={module._id}
                   singleElement={module}
                   options={"Ir al modulo"}
                 />

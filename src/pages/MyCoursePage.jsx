@@ -46,9 +46,9 @@ const MyCoursePage = () => {
     setModal(!modal);
   };
 
-  const createCourse = async (data) => {    
+  const createCourse = async (data) => {
     try {
-      let response = await createCourseAsync({body: data})
+      let response = await createCourseAsync({ body: data });
       //* close modal if response is success
       changeModalState();
       //* Set new course to the courses list
@@ -92,7 +92,7 @@ const MyCoursePage = () => {
             filteredCourses.map((course) => {
               return (
                 <GeneralCardComponent
-                  key={course.idCourse}
+                  key={course.id}
                   singleElement={course}
                   options={"actions"}
                 />
