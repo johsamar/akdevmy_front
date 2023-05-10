@@ -1,39 +1,43 @@
+import axios from "axios";
+import { environment } from "../config/environment";
 import { API } from "./AxiosInstance";
 
-const moduleEndPoint = `/modules`;
+const moduleEndPoint = `modules`;
 
-const getAllModules = async() => {
-    try {
-        const APIresponse = await API.get(moduleEndPoint);
-        return APIresponse;
-    } catch (error) {
-        return null;
-    }
+// New getModules, load data from backend server
+const getModules = async () => {
+  return await axios
+    .get(`${environment.backendBaseUrl}modules`)
+    .then((resp) => {
+      return resp.data.data;
+    })
+    .catch((error) => {
+      return error;
+    });
 };
 
-const createModule = async(module) => {
-    const header = {
-        "Content-Type": "application/json"
-    }
-    try {
-        const APIresponse = await API.post(moduleEndPoint, module, header);
-        return APIresponse;
-    } catch (error) {
-        return null;
-    }
-}
+const getModuleById = async (id) => {
+  return await axios
+    .get(`${environment.backendBaseUrl}modules/findById/${id}`)
+    .then((resp) => {
+      console.log(resp.data);
+      return resp.data.data;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
 
-const findByID = async(id) => {
-    try {
-        const APIresponse = await API.get(`${moduleEndPoint}/findById/${id}`);
-        return APIresponse;
-    } catch (error) {
-        return null;
-    }
-}
+const createModule = async (module) => {
+  const header = {
+    "Content-Type": "application/json",
+  };
+  try {
+    const APIresponse = await API.post(moduleEndPoint, module, header);
+    return APIresponse;
+  } catch (error) {
+    return null;
+  }
+};
 
-export {
-    getAllModules,
-    createModule,
-    findByID
-}
+export { getModules, createModule, getModuleById };
