@@ -1,7 +1,6 @@
 #form-file-upload {
     height: 10rem;
-    width: 20rem;
-    max-width: 100%;
+    width: 100%;
     text-align: center;
     position: relative;
   }

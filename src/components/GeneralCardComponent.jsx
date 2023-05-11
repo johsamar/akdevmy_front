@@ -3,6 +3,7 @@ import { environment } from "../config/environment";
 import { FaReadme, FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ActionEnum } from "../enums/action";
+import { VscDashboard } from "react-icons/vsc";
 
 /**
  *
@@ -29,7 +30,7 @@ const GeneralCardComponent = ({
   };
   const manageModule = () => {
     const module = { ...singleElement };
-    navigate(`/module/${module.id}`);
+    navigate(`/module/${module._id}`);
   };
 
   const update = () =>{
@@ -78,13 +79,15 @@ const GeneralCardComponent = ({
                   <FaRegEdit />
                 </span>
                 <span className="card-edit-actions" onClick={manageCourse}>
-                  M
+                  <VscDashboard />
                 </span>
               </div>
             ) : (
               options && (
                 <div className="d-flex justify-content-end">
-                  <button className="btn btn-primary" onClick={manageModule}>{options}</button>
+                  <button className="btn btn-primary" onClick={manageModule}>
+                    {options}
+                  </button>
                 </div>
               )
             )}
