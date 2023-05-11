@@ -5,6 +5,7 @@ import ReadClassComponent from "../components/modalsModule/ReadClassComponent";
 import DeleteClassComponent from "../components/modalsModule/DeleteClassComponent";
 import { CreateClassModalComponent } from "../components/CreateClassModalComponent";
 import { getModuleById } from "../services/ModulesService";
+import LoadingComponent from "../components/LoadingComponent";
 //import { Button } from "reactstrap";
 
 const ModuleDetailsPage = () => {
@@ -27,47 +28,43 @@ const ModuleDetailsPage = () => {
     setModalCreateClass(!modalCreateClass);
   };
 
-  return (
-    <>
-      <div className="containerPage">
-        {/* module */}
-        <p className="title-section-course">{module.name}</p>
-        <button
-          type="button"
-          className="btn btn-primary "
-          onClick={changeCreateClassModal}
-        >
-          Crear Clase
-        </button>
-        &nbsp; &nbsp; &nbsp;
-        <button type="button" className="btn btn-primary">
-          Crear Examen
-        </button>
-        <br />
-        <br />
-        <div className="container h3">
-          <div className="row">
-            <div className="col-2"></div>
-            <div className="col-8">
-              {/* TABLA DE CLASES */}
-              <table className="table table-striped">
-                <thead className="thead-dark h4">
-                  <tr className="text-center">
-                    <th scope="col">Nombre clase</th>
-                    <th scope="col">ver</th>
-                    <th scope="col">editar</th>
-                    <th scope="col">eliminar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {!module.classes ? (
-                    <tr>
-                      <td>
-                        <h1>CARGANDO CLASES ...</h1>
-                      </td>
+  if (!module.classes) {
+    return <LoadingComponent />;
+  } else {
+    return (
+      <>
+        <div className="containerPage">
+          {/* module */}
+          <p className="title-section-course">{module.name}</p>
+          <button
+            type="button"
+            className="btn btn-primary "
+            onClick={changeCreateClassModal}
+          >
+            Crear Clase
+          </button>
+          &nbsp; &nbsp; &nbsp;
+          <button type="button" className="btn btn-primary">
+            Crear Examen
+          </button>
+          <br />
+          <br />
+          <div className="container h3">
+            <div className="row">
+              <div className="col-2"></div>
+              <div className="col-8">
+                {/* TABLA DE CLASES */}
+                <table className="table table-striped">
+                  <thead className="thead-dark h4">
+                    <tr className="text-center">
+                      <th scope="col">Nombre clase</th>
+                      <th scope="col">ver</th>
+                      <th scope="col">editar</th>
+                      <th scope="col">eliminar</th>
                     </tr>
-                  ) : (
-                    module.classes.map((clase1) => {
+                  </thead>
+                  <tbody>
+                    {module.classes.map((clase1) => {
                       return (
                         <tr className="text-center h6" key={clase1._id}>
                           <th scope="col">{clase1.name}</th>
@@ -82,21 +79,21 @@ const ModuleDetailsPage = () => {
                           </th>
                         </tr>
                       );
-                    })
-                  )}
-                </tbody>
-              </table>
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              <div className="col-2"></div>
             </div>
-            <div className="col-2"></div>
           </div>
         </div>
-      </div>
-      {/* CreateClassModal */}
-      <CreateClassModalComponent
-        modalVisibility={modalCreateClass}
-        changeModalVisibility={changeCreateClassModal}
-      />
-    </>
-  );
+        {/* CreateClassModal */}
+        <CreateClassModalComponent
+          modalVisibility={modalCreateClass}
+          changeModalVisibility={changeCreateClassModal}
+        />
+      </>
+    );
+  }
 };
 export default ModuleDetailsPage;

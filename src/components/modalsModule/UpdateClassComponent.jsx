@@ -21,12 +21,13 @@ const UpdateClassComponent = ({ clase1 }) => {
     image,
     video,
     audio,
+    article,
     document,
     position,
   } = clase1;
 
   const [componentToRender, setComponentToRender] = useState("");
-  const [article, setArticle] = useState("");
+  const [articleState, setArticleState] = useState("");
   const [classType, setClassType] = useState("");
 
   const {
@@ -43,7 +44,7 @@ const UpdateClassComponent = ({ clase1 }) => {
   });
 
   const addArticle = (newArticle) => {
-    setArticle(newArticle);
+    setArticleState(newArticle);
   };
 
   const changeChoice = (choice) => {
@@ -80,7 +81,7 @@ const UpdateClassComponent = ({ clase1 }) => {
       data.image,
       data.video,
       data.audio,
-      article,
+      articleState,
       data.document,
       position
     );

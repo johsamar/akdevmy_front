@@ -15,19 +15,25 @@ import {
 import { AiFillPlusCircle } from "react-icons/ai";
 //import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import LoadingComponent from "../components/LoadingComponent";
 
 const MyCoursePage = () => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [modal, setModal] = useState(false); //* modalVisibility
 
+  // Loading state
+  const [isLoading, setIsLoading] = useState(false);
+
   const getCoursesFromService = async () => {
     let coursesList = await getCourses();
     setCourses(coursesList.data);
     setFilteredCourses(coursesList.data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
+    setIsLoading(true);
     getCoursesFromService();
   }, []);
 
@@ -71,6 +77,7 @@ const MyCoursePage = () => {
 
   return (
     <>
+      {isLoading && <LoadingComponent />}
       <div className="containerPage">
         {/* My Courses title */}
         <p className="title-section-course">Mis cursos</p>
