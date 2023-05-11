@@ -15,12 +15,26 @@ const createCourseAsync = async ({ body }) => {
   });
 };
 
+const updateCoursesAsync = async ({ body }) => {
+    const header = {
+        "Content-Type": "application/json"
+    }
+    console.log(body);
+    return await axios.put(`${environment.backendBaseUrl}updateCourse/${body.id}`, body, {
+        headers: header
+    });
+}
+
+const deleteCoursesByIdAsync = async ({ id }) => {
+    return await axios.delete(`${environment.backendBaseUrl}deleteCourse/${id}`);
+}
+
 const findCourseByID = async (id) => {
-  try {
-    return await axios.get(`${environment.backendBaseUrl}/findById/${id}`);
-  } catch (error) {
-    return null;
-  }
+    try {
+        return await axios.get(`${environment.backendBaseUrl}/findById/${id}`);
+    } catch (error) {
+        return null;
+    }
 };
 
-export { getCourses, createCourseAsync, findCourseByID };
+export { getCourses, createCourseAsync, updateCoursesAsync, deleteCoursesByIdAsync, findCourseByID };

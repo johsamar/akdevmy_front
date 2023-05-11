@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 import { GeneralCardComponent } from "../components/GeneralCardComponent";
-import { getCourses, createCourseAsync } from "../services/courseService";
+import { getCourses } from "../services/courseService";
 import "../styles/MyCoursePage.css";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  FormGroup,
-  Input,
-  Label,
-} from "reactstrap";
+import { Button } from "reactstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { CourseModalComponent } from "../components/CourseModalComponent"
+import { ActionEnum } from "../enums/action";
 //import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LoadingComponent from "../components/LoadingComponent";
 
 const MyCoursePage = () => {
-  const [courses, setCourses] = useState([]);
+  const [selectedCourseData, setSelectedCourseData] = useState({});
+  const [courses, setCourses] = useState({});
+  const [action, setAction] = useState(ActionEnum.create);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [modal, setModal] = useState(false); //* modalVisibility
 
@@ -52,28 +47,10 @@ const MyCoursePage = () => {
     setModal(!modal);
   };
 
-  const createCourse = async (data) => {
-    try {
-      let response = await createCourseAsync({ body: data });
-      //* close modal if response is success
-      changeModalState();
-      //* Set new course to the courses list
-      courses.push(response.data.data);
-      //* Reset filtered courses
-      setFilteredCourses(courses);
-      //* Reset form data
-      reset();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const createCourse = () => {
+    setAction(ActionEnum.create);
+    changeModalState();
+  }
 
   return (
     <>
@@ -99,103 +76,31 @@ const MyCoursePage = () => {
             filteredCourses.map((course) => {
               return (
                 <GeneralCardComponent
+                  selectedObject={setSelectedCourseData}
                   key={course.id}
                   singleElement={course}
                   options={"actions"}
+                  actionState={setAction}
+                  changeModalState={changeModalState}
                 />
               );
             })}
         </div>
 
         {/* add course button */}
-        <Button className="btn-flotante" onClick={changeModalState}>
+        <Button className="btn-flotante" onClick={createCourse}>
           {/* Add course icon */}
           <AiFillPlusCircle className="addCourseIcon" />
         </Button>
 
-        <Modal className="modalCreateCourses" isOpen={modal}>
-          <ModalHeader>Nuevo curso</ModalHeader>
-
-          <ModalBody>
-            <form onSubmit={handleSubmit(createCourse)}>
-              <FormGroup>
-                <Label for="name">Nombre del curso</Label>
-                <input
-                  type="text"
-                  id="name"
-                  className="form-control z-depth-1"
-                  placeholder="Escribe el nombre del curso aquí..."
-                  {...register("name", {
-                    required: "El nombre del curso es requerido",
-                    minLength: {
-                      value: 1,
-                      message: "la longitud mínima es 1",
-                    },
-                  })}
-                />
-                {errors.name && (
-                  <div className="alert alert-danger" role="alert">
-                    {errors.name.message}
-                  </div>
-                )}
-              </FormGroup>
-
-              <FormGroup className="form-group shadow-textarea">
-                <Label for="description">Descripción</Label>
-                <textarea
-                  type="text"
-                  id="description"
-                  className="form-control z-depth-1"
-                  rows="3"
-                  placeholder="Escribe la descripción del curso aquí..."
-                  {...register("description", {
-                    required: "La descripción del curso es requerida",
-                    minLength: {
-                      value: 5,
-                      message: "la longitud mínima es 5",
-                    },
-                  })}
-                />
-                {errors.description && (
-                  <div className="alert alert-danger" role="alert">
-                    {errors.description.message}
-                  </div>
-                )}
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="imageUrl">Imagen url</Label>
-                <input
-                  type="text"
-                  id="imageUrl"
-                  className="form-control z-depth-1"
-                  placeholder="Escribe la url de la imagen del curso aquí..."
-                  {...register("imageUrl", {
-                    required: "La url de la imagen del curso es requerida",
-                    minLength: {
-                      value: 1,
-                      message: "la longitud mínima es 1",
-                    },
-                  })}
-                />
-                {errors.imageUrl && (
-                  <div className="alert alert-danger" role="alert">
-                    {errors.imageUrl.message}
-                  </div>
-                )}
-              </FormGroup>
-              <Button type="submit" color="primary" style={{ width: "100%" }}>
-                Crear curso
-              </Button>
-            </form>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button color="secondary" onClick={changeModalState}>
-              Cerrar
-            </Button>
-          </ModalFooter>
-        </Modal>
+        <CourseModalComponent
+          courseAction={selectedCourseData}
+          action={action}
+          changeModalState={changeModalState}
+          modal={modal}
+          courses={courses}
+          setFilteredCourses={setFilteredCourses}
+        />
       </div>
     </>
   );
