@@ -9,15 +9,22 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import { createCourseAsync } from "../services/courseService";
+import { 
+  createCourseAsync,
+  updateCoursesAsync,
+} from "../services/courseService";
 import { useForm } from "react-hook-form";
+import { ActionEnum } from "../enums/action";
 
 const CourseModalComponent = ({
+  courseAction,
+  action,
   modal,
   changeModalState,
   courses,
   setFilteredCourses,
 }) => {
+
   //* new
   const {
     register,
@@ -43,6 +50,18 @@ const CourseModalComponent = ({
     }
   };
 
+  const updateCourse = async (data) => {
+    try {
+      //* set id to update
+      data.id = courseAction.id;
+      let response = await updateCoursesAsync({ body: data })
+      console.log(response);
+      changeModalState()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const changeState = () => {
     changeModalState();
     reset();
@@ -51,24 +70,40 @@ const CourseModalComponent = ({
   return (
     <>
       <Modal className="modalCreateCourses" isOpen={modal}>
-        <ModalHeader>Nuevo curso</ModalHeader>
+        <ModalHeader>
+          {
+            action === ActionEnum.read 
+              ? "Consultar curso"
+              : action === ActionEnum.update
+                ? "Actualizar curso"
+                : "Nuevo curso"
+          }
+        </ModalHeader>
 
         <ModalBody>
-          <form onSubmit={handleSubmit(createCourse)}>
+          <form onSubmit={ action === ActionEnum.create ? handleSubmit(createCourse) : handleSubmit(updateCourse)}>
             <FormGroup>
               <Label for="name">Nombre del curso</Label>
               <input
+                defaultValue={
+                  action === ActionEnum.read || action === ActionEnum.update
+                    ? courseAction.name
+                    : ""
+                }
                 type="text"
                 id="name"
                 className="form-control z-depth-1"
                 placeholder="Escribe el nombre del curso aquí..."
-                {...register("name", {
+                disabled={action === ActionEnum.read}
+                {
+                  ...register("name", {
                   required: "El nombre del curso es requerido",
                   minLength: {
                     value: 1,
                     message: "la longitud mínima es 1",
                   },
-                })}
+                  })
+                }
               />
               {errors.name && (
                 <div className="alert alert-danger" role="alert">
@@ -80,11 +115,17 @@ const CourseModalComponent = ({
             <FormGroup className="form-group shadow-textarea">
               <Label for="description">Descripción</Label>
               <textarea
+                defaultValue={
+                  action === ActionEnum.read || action === ActionEnum.update
+                    ? courseAction.description
+                    : ""
+                }              
                 type="text"
                 id="description"
                 className="form-control z-depth-1"
                 rows="3"
                 placeholder="Escribe la descripción del curso aquí..."
+                disabled={action === ActionEnum.read}
                 {...register("description", {
                   required: "La descripción del curso es requerida",
                   minLength: {
@@ -103,10 +144,16 @@ const CourseModalComponent = ({
             <FormGroup>
               <Label for="imageUrl">Imagen url</Label>
               <input
+                defaultValue={
+                  action === ActionEnum.read || action === ActionEnum.update
+                    ? courseAction.imageUrl
+                    : ""
+                }              
                 type="text"
                 id="imageUrl"
                 className="form-control z-depth-1"
                 placeholder="Escribe la url de la imagen del curso aquí..."
+                disabled={action === ActionEnum.read}
                 {...register("imageUrl", {
                   required: "La url de la imagen del curso es requerida",
                   minLength: {
@@ -121,8 +168,17 @@ const CourseModalComponent = ({
                 </div>
               )}
             </FormGroup>
-            <Button type="submit" color="primary" style={{ width: "100%" }}>
-              Crear curso
+            <Button
+              type="submit"
+              color="primary"
+              style={{ 
+                width: "100%",
+                visibility: action !== ActionEnum.read
+                  ? "visible"
+                  : "hidden"
+              }}
+            >
+              {action === ActionEnum.create ? "Crear curso" : "Actualizar curso"}
             </Button>
           </form>
         </ModalBody>

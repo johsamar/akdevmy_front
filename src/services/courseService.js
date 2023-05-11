@@ -17,18 +17,18 @@ const createCourseAsync = async ({ body }) => {
     });
 };
 
-const updateCourses = async ({body}) => {
+const updateCoursesAsync = async ({ body }) => {
     const header = {
         "Content-Type": "application/json"
     }
     console.log(body);
-    return await axios.put(`${environment.backendBaseUrl}updateCourse`, body, {
+    return await axios.put(`${environment.backendBaseUrl}updateCourse/${body.id}`, body, {
         headers: header
     });
 }
 
-const deleteCoursesById = async ({id}) => {
+const deleteCoursesByIdAsync = async ({ id }) => {
     return await axios.delete(`${environment.backendBaseUrl}deleteCourse/${id}`);
 }
 
-export { getCourses, createCourseAsync, updateCourses, deleteCoursesById };
+export { getCourses, createCourseAsync, updateCoursesAsync, deleteCoursesByIdAsync };

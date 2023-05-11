@@ -5,9 +5,12 @@ import "../styles/MyCoursePage.css";
 import { Button } from "reactstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { CourseModalComponent } from "../components/CourseModalComponent"
+import { ActionEnum } from "../enums/action";
 
 const MyCoursePage = () => {
-  const [courses, setCourses] = useState([]);
+  const [selectedCourseData, setSelectedCourseData] = useState({});
+  const [courses, setCourses] = useState({});
+  const [action, setAction] = useState(ActionEnum.create);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [modal, setModal] = useState(false); //* modalVisibility
 
@@ -36,6 +39,11 @@ const MyCoursePage = () => {
     setModal(!modal);
   };
 
+  const createCourse = () => {
+    setAction(ActionEnum.create);
+    changeModalState();
+  }
+
   return (
     <>
       <div className="containerPage">
@@ -59,21 +67,26 @@ const MyCoursePage = () => {
             filteredCourses.map((course) => {
               return (
                 <GeneralCardComponent
+                  selectedObject={setSelectedCourseData}
                   key={course.idCourse}
                   singleElement={course}
                   options={"actions"}
+                  actionState={setAction}
+                  changeModalState={changeModalState}
                 />
               );
             })}
         </div>
 
         {/* add course button */}
-        <Button className="btn-flotante" onClick={changeModalState}>
+        <Button className="btn-flotante" onClick={createCourse}>
           {/* Add course icon */}
           <AiFillPlusCircle className="addCourseIcon" />
         </Button>
 
         <CourseModalComponent
+          courseAction={selectedCourseData}
+          action={action}
           changeModalState={changeModalState}
           modal={modal}
           courses={courses}

@@ -2,6 +2,7 @@ import "../styles/GeneralCardComponent.css";
 import { environment } from "../config/environment";
 import { FaReadme, FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { ActionEnum } from "../enums/action";
 
 /**
  *
@@ -10,7 +11,13 @@ import { useNavigate } from "react-router-dom";
  *                 - If it has a word, the word will be painted on the button.
  *                 - If it does not have anything, the button will not be rendered.
  */
-const GeneralCardComponent = ({ singleElement, options }) => {
+const GeneralCardComponent = ({ 
+  singleElement,
+  options,
+  actionState,
+  changeModalState,
+  selectedObject
+}) => {
   const navigate = useNavigate();
   /**
    * This function is used to send access to the course details path
@@ -24,6 +31,18 @@ const GeneralCardComponent = ({ singleElement, options }) => {
     const module = { ...singleElement };
     navigate(`/module/${module.id}`);
   };
+
+  const update = () =>{
+    actionState(ActionEnum.update);
+    selectedObject(singleElement)
+    changeModalState();
+  }
+
+  const read = () =>{
+    actionState(ActionEnum.read);
+    selectedObject(singleElement)
+    changeModalState();
+  }
 
   return (
     <>
@@ -52,10 +71,10 @@ const GeneralCardComponent = ({ singleElement, options }) => {
             {/*  */}
             {options === "actions" ? (
               <div className="d-flex justify-content-around">
-                <span className="card-edit-actions">
+                <span className="card-edit-actions" onClick={read}>
                   <FaReadme />
                 </span>
-                <span className="card-edit-actions">
+                <span className="card-edit-actions" onClick={update}>
                   <FaRegEdit />
                 </span>
                 <span className="card-edit-actions" onClick={manageCourse}>
