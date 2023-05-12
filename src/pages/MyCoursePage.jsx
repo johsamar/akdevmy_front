@@ -99,6 +99,7 @@ const MyCoursePage = () => {
           changeModalState={changeModalState}
           modal={modal}
           courses={courses}
+          setCourses={setCourses}
           setFilteredCourses={setFilteredCourses}
         />
       </div>

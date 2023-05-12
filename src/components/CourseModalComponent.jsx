@@ -22,6 +22,7 @@ const CourseModalComponent = ({
   modal,
   changeModalState,
   courses,
+  setCourses,
   setFilteredCourses,
 }) => {
 
@@ -56,7 +57,17 @@ const CourseModalComponent = ({
       data.id = courseAction.id;
       let response = await updateCoursesAsync({ body: data })
       console.log(response);
-      changeModalState()
+      changeModalState();
+      let newCourses = courses.map((course) => {
+        if(data.id == course.id){
+          return data;
+        }
+        return course;
+      })
+
+      setCourses(newCourses);
+      setFilteredCourses(newCourses);
+
     } catch (error) {
       console.log(error)
     }
