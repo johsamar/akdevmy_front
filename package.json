@@ -21,6 +21,7 @@
     "react-router-dom": "^6.11.0",
     "react-select": "^5.7.3",
     "reactstrap": "^9.1.9",
+    "sweetalert2": "^11.7.5",
     "tinymce": "^6.4.2"
   },
   "devDependencies": {
