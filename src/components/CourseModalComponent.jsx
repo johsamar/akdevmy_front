@@ -15,6 +15,7 @@ import {
 } from "../services/courseService";
 import { useForm } from "react-hook-form";
 import { ActionEnum } from "../enums/action";
+import Swal from 'sweetalert2';
 
 const CourseModalComponent = ({
   courseAction,
@@ -46,8 +47,22 @@ const CourseModalComponent = ({
       setFilteredCourses(courses);
       //* Reset form data
       reset();
+
+      Swal.fire({
+        title: 'Curso creado con exito!',
+        text: `${data.name} fue creado exitosamente!`,
+        icon: 'success',
+        timer: '4000'
+      })
     } catch (error) {
       console.log(error);
+
+      Swal.fire({
+        title: 'Ha ocurrido un error',
+        text: `${data.name} no se se pudo crear`,
+        icon: 'error',
+        timer: '4000'
+      })
     }
   };
 
@@ -68,8 +83,22 @@ const CourseModalComponent = ({
       setCourses(newCourses);
       setFilteredCourses(newCourses);
 
+      Swal.fire({
+        title: '¡Curso actualizado con exito!',
+        text: `¡${data.name} fue actualizado exitosamente!`,
+        icon: 'success',
+        timer: '4000'
+      })
+
     } catch (error) {
       console.log(error)
+
+      Swal.fire({
+        title: 'Ha ocurrido un error al actualizar el curso!',
+        text: `${data.name} no se se pudo actualizar`,
+        icon: 'error',
+        timer: '4000'
+      })
     }
   }
 
