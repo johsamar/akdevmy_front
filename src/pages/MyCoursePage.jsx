@@ -6,13 +6,11 @@ import { Button } from "reactstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { CourseModalComponent } from "../components/CourseModalComponent"
 import { ActionEnum } from "../enums/action";
-//import { Form } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import LoadingComponent from "../components/LoadingComponent";
 
 const MyCoursePage = () => {
   const [selectedCourseData, setSelectedCourseData] = useState({});
-  const [courses, setCourses] = useState({});
+  const [courses, setCourses] = useState([]);
   const [action, setAction] = useState(ActionEnum.create);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [modal, setModal] = useState(false); //* modalVisibility

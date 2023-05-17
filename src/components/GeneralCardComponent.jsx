@@ -4,6 +4,7 @@ import { FaReadme, FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ActionEnum } from "../enums/action";
 import { VscDashboard } from "react-icons/vsc";
+import PropTypes from "prop-types";
 
 /**
  *
@@ -97,5 +98,13 @@ const GeneralCardComponent = ({
     </>
   );
 };
+
+GeneralCardComponent.propTypes = {
+  singleElement: PropTypes.object.isRequired,
+  options: PropTypes.string.isRequired ,
+  actionState: PropTypes.func.isRequired,
+  changeModalState: PropTypes.func.isRequired,
+  selectedObject: PropTypes.func.isRequired,
+}
 
 export { GeneralCardComponent };

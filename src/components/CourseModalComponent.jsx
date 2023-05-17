@@ -6,7 +6,6 @@ import {
   ModalBody,
   ModalFooter,
   FormGroup,
-  Input,
   Label,
 } from "reactstrap";
 import { 
@@ -16,6 +15,7 @@ import {
 import { useForm } from "react-hook-form";
 import { ActionEnum } from "../enums/action";
 import { alertError, alertSuccess } from "../utils/Alerts"
+import PropTypes from "prop-types";
 
 const CourseModalComponent = ({
   courseAction,
@@ -223,5 +223,15 @@ const CourseModalComponent = ({
     </>
   );
 };
+
+CourseModalComponent.propTypes = {
+  courseAction: PropTypes.object.isRequired,
+  action: PropTypes.number.isRequired,
+  modal: PropTypes.bool.isRequired,
+  changeModalState: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired,
+  setCourses: PropTypes.func.isRequired,
+  setFilteredCourses: PropTypes.func.isRequired,
+}
 
 export { CourseModalComponent };
