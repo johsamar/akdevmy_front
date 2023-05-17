@@ -32,6 +32,7 @@ function PageRouter() {
             style={showSideBar ? { marginLeft: "20%" } : { marginRight: "0%" }}
           >
             <button href="#" className="hidden-button btn" onClick={changeSideBarStatus}>
+            {/* navbarIcon */}
             <AiOutlineBars className="navBarIcon" />
             </button>
             <Routes>
