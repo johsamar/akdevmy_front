@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { AiOutlineEdit } from "react-icons/ai";
-import FileUploader from "../FileComponent";
-import DragDropFile from "../MultimediaComponent";
-import { ExternalLinkComponent } from "../ExternalLinkComponent";
-import InputArticleComponent from "../InputArticleComponent";
+import FileUploader from "../classesTypes/FileComponent";
+import DragDropFile from "../classesTypes/MultimediaComponent";
+import { ExternalLinkComponent } from "../classesTypes/ExternalLinkComponent";
+import InputArticleComponent from "../classesTypes/InputArticleComponent";
 import PropTypes from "prop-types";
 // Import models
 import { TYPES } from "../../models/types.enum";
 import { Classes } from "../../models/classes.class";
+import { useEffect } from "react";
+import { updateClassModule } from "../../services/ModulesService";
 
-const UpdateClassComponent = ({ clase1 }) => {
+const UpdateClassComponent = ({ clase1, moduleId }) => {
   const {
     _id,
     name,
@@ -26,22 +28,30 @@ const UpdateClassComponent = ({ clase1 }) => {
     position,
   } = clase1;
 
-  const [componentToRender, setComponentToRender] = useState("");
-  const [articleState, setArticleState] = useState("");
-  const [classType, setClassType] = useState("");
-
+  // Form context
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
+    reset,
+  } = useFormContext();
+
+  const [componentToRender, setComponentToRender] = useState("");
+  const [articleState, setArticleState] = useState("");
+  const [classType, setClassType] = useState(type);
+
+  const initialValues = () => {
+    reset({
+      type: type,
       name: name,
       description: description,
       duration: duration,
-      url: url,
-    },
-  });
+    });
+  };
+
+  useEffect(() => {
+    initialValues();
+  }, []);
 
   const addArticle = (newArticle) => {
     setArticleState(newArticle);
@@ -58,11 +68,11 @@ const UpdateClassComponent = ({ clase1 }) => {
         setClassType(TYPES.MULTIMEDIA);
         break;
       case "3":
-        setComponentToRender(<ExternalLinkComponent {...register("url")} />);
+        setComponentToRender(<ExternalLinkComponent initialValue={url} />);
         setClassType(TYPES.LINK);
         break;
       case "4":
-        setComponentToRender(<InputArticleComponent addArticle={addArticle} />);
+        setComponentToRender(<InputArticleComponent addArticle={addArticle} initialValue={article}/>);
         setClassType(TYPES.ARTICLE);
         break;
       default:
@@ -70,23 +80,34 @@ const UpdateClassComponent = ({ clase1 }) => {
     }
   };
 
-  const sendData = (data) => {
-    // Pass the data to the new construct
-    const updateClass = new Classes(
-      data.name,
-      classType,
-      data.description,
-      data.duration,
-      data.url,
-      data.image,
-      data.video,
-      data.audio,
-      articleState,
-      data.document,
-      position
-    );
-    console.log(data);
-    console.log(updateClass);
+  const sendData = async (data) => {
+    try {
+      // Pass the data to the new construct
+      const updateClass = new Classes()
+        .setGet_id(_id)
+        .setType(classType)
+        .setName(data.name)
+        .setDescription(data.description)
+        .setDuration(data.duration)
+        .setUrl(data.url)
+        .setImage(data.multimedia)
+        .setVideo(data.multimedia)
+        .setArticle(articleState)
+        .setDocument(data.document)
+        .setPosition(position)
+        .build();
+
+      console.log(updateClass);
+
+      let response = await updateClassModule({
+        body: updateClass,
+        moduleId: moduleId,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    reset();
   };
 
   return (
@@ -198,12 +219,12 @@ const UpdateClassComponent = ({ clase1 }) => {
                 <div className="row mt-3">
                   <div className="col">
                     <div className="form-group">
-                      <label htmlFor="time" className="form-label">
+                      <label htmlFor="duration" className="form-label">
                         Duración
                       </label>
                       <input
                         type="text"
-                        id="time"
+                        id="duration"
                         className="form-control z-depth-1"
                         placeholder="La duración de la clase va aquí..."
                         {...register("duration", {
@@ -214,9 +235,9 @@ const UpdateClassComponent = ({ clase1 }) => {
                           },
                         })}
                       />
-                      {errors.time && (
+                      {errors.duration && (
                         <div className="alert alert-danger" role="alert">
-                          {errors.time.message}
+                          {errors.duration.message}
                         </div>
                       )}
                     </div>
