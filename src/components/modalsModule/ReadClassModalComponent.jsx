@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import {  AiOutlineSearch } from "react-icons/ai";
 
 
-const ReadClassComponent = ({clase1}) => {
+const ReadClassModalComponent = ({clase1}) => {
 
     const {_id,name,type,description,duration,url,image,video,document,position} = clase1;
 
@@ -107,4 +107,4 @@ const ReadClassComponent = ({clase1}) => {
   );
 };
 
-export default ReadClassComponent;
+export default ReadClassModalComponent;

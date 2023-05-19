@@ -1,6 +1,6 @@
 export const TYPES = {
-  DOCUMENT: "documents",
-  MULTIMEDIA: "multimedia",
-  LINK: "link",
-  ARTICLE: "article",
+  DOCUMENT: "Documento",
+  MULTIMEDIA: "Multimedia",
+  LINK: "Enlace externo",
+  ARTICLE: "Articulo",
 };

@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { FormGroup, Label } from "reactstrap";
+import PropTypes from "prop-types";
 
 const ExternalLinkComponent = ({ initialValue }) => {
   // Form context
@@ -24,6 +25,7 @@ const ExternalLinkComponent = ({ initialValue }) => {
               message: "la longitud mínima es 1",
             },
           })}
+          defaultValue={initialValue}
         />
         {errors.url && (
           <div className="alert alert-danger" role="alert">
@@ -33,6 +35,10 @@ const ExternalLinkComponent = ({ initialValue }) => {
       </FormGroup>
     </>
   );
+};
+
+ExternalLinkComponent.propTypes = {
+  initialValue: PropTypes.string,
 };
 
 export { ExternalLinkComponent };

@@ -6,7 +6,6 @@ import {
   ModalBody,
   ModalFooter,
   FormGroup,
-  Input,
   Label,
 } from "reactstrap";
 import { 
@@ -15,6 +14,8 @@ import {
 } from "../services/courseService";
 import { useForm } from "react-hook-form";
 import { ActionEnum } from "../enums/action";
+import { alertError, alertSuccess } from "../utils/Alerts"
+import PropTypes from "prop-types";
 
 const CourseModalComponent = ({
   courseAction,
@@ -46,8 +47,18 @@ const CourseModalComponent = ({
       setFilteredCourses(courses);
       //* Reset form data
       reset();
+      //* Alert create
+      alertSuccess({
+        title: "¡Curso creado con exito!",
+        text: `¡${data.name} fue creado exitosamente!`
+      })
     } catch (error) {
       console.log(error);
+      //* Alert create error
+      alertError({
+        title: "¡Ha ocurrido un error al crear el curso!",
+        text: `¡${data.name} no se se pudo crear!`
+      })
     }
   };
 
@@ -67,9 +78,18 @@ const CourseModalComponent = ({
 
       setCourses(newCourses);
       setFilteredCourses(newCourses);
-
+      //* Alert update
+      alertSuccess({
+        title: "¡Curso actualizado con exito!", 
+        text: `¡${data.name} fue actualizado exitosamente!`
+        })
     } catch (error) {
       console.log(error)
+      //* Alert update error
+      alertError({
+        title: "¡Ha ocurrido un error al actualizar el curso!",
+        text: `¡${data.name} no se se pudo actualizar!`
+      })
     }
   }
 
@@ -203,5 +223,15 @@ const CourseModalComponent = ({
     </>
   );
 };
+
+CourseModalComponent.propTypes = {
+  courseAction: PropTypes.object.isRequired,
+  action: PropTypes.number.isRequired,
+  modal: PropTypes.bool.isRequired,
+  changeModalState: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired,
+  setCourses: PropTypes.func.isRequired,
+  setFilteredCourses: PropTypes.func.isRequired,
+}
 
 export { CourseModalComponent };

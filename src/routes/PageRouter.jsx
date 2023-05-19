@@ -5,9 +5,9 @@ import Estudiantes from "../pages/Estudiantes";
 import NavBar from "../containers/NavBar";
 import "../styles/PageRouter.css";
 import { useState } from "react";
-import { MdArrowCircleLeft, MdArrowCircleRight } from "react-icons/md";
 import CourseDetailsPage from "../pages/CourseDetailsPage";
 import ModuleDetailsPage from "../pages/ModuleDetailsPage";
+import { AiOutlineBars } from "react-icons/ai";
 
 function PageRouter() {
   const [showSideBar, setShowSideBar] = useState(true);
@@ -32,11 +32,8 @@ function PageRouter() {
             style={showSideBar ? { marginLeft: "20%" } : { marginRight: "0%" }}
           >
             <button href="#" className="hidden-button btn" onClick={changeSideBarStatus}>
-              {showSideBar ? (
-                <MdArrowCircleLeft className="arrowIcon" />
-              ) : (
-                <MdArrowCircleRight className="arrowIcon" />
-              )}
+            {/* navbarIcon */}
+            <AiOutlineBars className="navBarIcon" />
             </button>
             <Routes>
               <Route path="/" element={<Academia />} />

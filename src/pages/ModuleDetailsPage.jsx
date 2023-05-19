@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import UpdateClassComponent from "../components/modalsModule/UpdateClassComponent";
-import ReadClassComponent from "../components/modalsModule/ReadClassComponent";
-import DeleteClassComponent from "../components/modalsModule/DeleteClassComponent";
-import { CreateClassModalComponent } from "../components/CreateClassModalComponent";
+import UpdateClassComponent from "../components/modalsModule/UpdateClassModalComponent";
+import ReadClassComponent from "../components/modalsModule/ReadClassModalComponent";
+import DeleteClassComponent from "../components/modalsModule/DeleteClassModalComponent";
+import { CreateClassModalComponent } from "../components/modalsModule/CreateClassModalComponent";
 import { getModuleById } from "../services/ModulesService";
 import LoadingComponent from "../components/LoadingComponent";
 // Import hook useForm
 import { FormProvider, useForm } from "react-hook-form";
+import { AiOutlineEdit } from "react-icons/ai";
 //import { Button } from "reactstrap";
 
 const ModuleDetailsPage = () => {
@@ -19,12 +20,21 @@ const ModuleDetailsPage = () => {
       type: "",
       name: "",
       description: "",
-      duration: "",
+      duration: 0,
+      url: "",
+      image: "",
+      video: "",
+      audio: "",
+      article: "",
+      document: "",
+      position: 0,
     },
   });
 
   const [module, setModule] = useState(idModule);
+  const [classes, setClasses] = useState({});
   const [modalCreateClass, setModalCreateClass] = useState(false); //* modalVisibility
+  const [modalUpdateClass, setModalUpdateClass] = useState(false); //* modalVisibility
 
   async function getModule() {
     const moduleList = await getModuleById(idModule);
@@ -33,11 +43,16 @@ const ModuleDetailsPage = () => {
 
   useEffect(() => {
     getModule();
-  }, []);
+  }, [classes]);
 
   //* changeModalVisibility
   const changeCreateClassModal = () => {
     setModalCreateClass(!modalCreateClass);
+  };
+
+  //* changeModalVisibility
+  const changeUpdateClassModal = () => {
+    setModalUpdateClass(!modalUpdateClass);
   };
 
   if (!module.classes) {
@@ -78,18 +93,31 @@ const ModuleDetailsPage = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {module.classes.map((clase1) => {
+                      {module.classes.map((class1) => {
                         return (
-                          <tr className="text-center h6" key={clase1._id}>
-                            <th scope="col">{clase1.name}</th>
+                          <tr className="text-center h6" key={class1._id}>
+                            <th scope="col">{class1.name}</th>
                             <th scope="col">
-                              <ReadClassComponent clase1={clase1} />
+                              <ReadClassComponent clase1={class1} />
                             </th>
                             <th scope="col">
-                              <UpdateClassComponent clase1={clase1} moduleId={idModule} />
+                              <button
+                                type="button"
+                                className="btn btn-primary"
+                                onClick={() => {
+                                  setClasses(class1);
+                                  changeUpdateClassModal();
+                                }}
+                              >
+                                <AiOutlineEdit />
+                              </button>
                             </th>
                             <th scope="col">
-                              <DeleteClassComponent clase1={clase1} />
+                              <DeleteClassComponent
+                                classes={class1}
+                                moduleId={idModule}
+                                updateModules={getModule}
+                              />
                             </th>
                           </tr>
                         );
@@ -105,6 +133,16 @@ const ModuleDetailsPage = () => {
           <CreateClassModalComponent
             modalVisibility={modalCreateClass}
             changeModalVisibility={changeCreateClassModal}
+            moduleId={idModule}
+            updateModules={getModule}
+          />
+          {/* UpdateClassModal */}
+          <UpdateClassComponent
+            classes={classes}
+            setClasses={setClasses}
+            moduleId={idModule}
+            modalVisibility={modalUpdateClass}
+            changeModalVisibility={changeUpdateClassModal}
           />
         </FormProvider>
       </>

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { environment } from "../config/environment";
-import { API } from "./AxiosInstance";
+//import { API } from "./AxiosInstance";
 
-const moduleEndPoint = `modules`;
+//const moduleEndPoint = `modules`;
 
 // New getModules, load data from backend server
 const getModules = async () => {
@@ -27,23 +27,50 @@ const getModuleById = async (id) => {
     });
 };
 
-const createModule = async (module) => {
+const createModuleAsync = async ({ body }) => {
   const header = {
     "Content-Type": "application/json",
   };
-  try {
-    const APIresponse = await API.post(moduleEndPoint, module, header);
-    return APIresponse;
-  } catch (error) {
-    return null;
-  }
+  console.log(body);
+  return await axios.post(`${environment.backendBaseUrl}modules/create`, body, {
+    headers: header,
+  });
+};
+
+const deleteModuleByIdAsync = async ({ id }) => {
+  return await axios.delete(
+    `${environment.backendBaseUrl}modules/delete/${id}`
+  );
+};
+
+
+/**
+ * CRUD classes: Create, Update, Delete
+ */
+
+const createClassModule = async ({ body, moduleId }) => {
+  const header = {
+    "Content-Type": "application/json",
+  };
+  return await axios
+    .post(`${environment.backendBaseUrl}modules/${moduleId}/class`, body, {
+      headers: header,
+    })
+    .then((resp) => {
+      return resp.data.message;
+    })
+    .catch((error) => {
+      // !Delete comment
+      console.log(error);
+      return error;
+    });
 };
 
 const updateClassModule = async ({ body, moduleId }) => {
   const header = {
     "Content-Type": "application/json",
   };
-  console.log(body);
+
   return await axios
     .patch(
       `${environment.backendBaseUrl}modules/${moduleId}/class/${body.get_id}`,
@@ -53,13 +80,34 @@ const updateClassModule = async ({ body, moduleId }) => {
       }
     )
     .then((resp) => {
-      console.log(resp);
-      return resp;
+      return resp.data.message;
     })
     .catch((error) => {
+      // !Delete comment
       console.log(error);
       return error;
     });
 };
 
-export { getModules, createModule, getModuleById, updateClassModule };
+const deleteClassModule = async ({ classId, moduleId }) => {
+  return await axios
+    .delete(`${environment.backendBaseUrl}modules/${moduleId}/class/${classId}`)
+    .then((resp) => {
+      return resp.data.message;
+    })
+    .catch((error) => {
+      // !Delete comment
+      console.log(error);
+      return error;
+    });
+};
+
+export {
+  getModules,
+  getModuleById,
+  createModuleAsync,
+  deleteModuleByIdAsync,
+  createClassModule,
+  updateClassModule,
+  deleteClassModule,
+};
