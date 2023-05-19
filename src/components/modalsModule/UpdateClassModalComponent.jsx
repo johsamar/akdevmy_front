@@ -27,6 +27,7 @@ import {
 } from "reactstrap";
 import Select from "react-select";
 import { alertError, alertSuccess } from "../../utils/Alerts";
+import { buildClassByType, buildClassTypeLink } from "../../models/classesTypes";
 
 const UpdateClassModalComponent = ({
   classes,
@@ -60,7 +61,7 @@ const UpdateClassModalComponent = ({
 
   const [componentToRender, setComponentToRender] = useState("");
   const [articleState, setArticleState] = useState("");
-  const [classType, setClassType] = useState("");
+  const [classType, setClassType] = useState(type);
 
   const initialValues = () => {
     reset({
@@ -149,20 +150,18 @@ const UpdateClassModalComponent = ({
   // This function is used to submit the form data and update the class
   const sendData = async (data) => {
     try {
-      // Pass the data to the new construct
-      const updateClass = new Classes()
-        .setGet_id(_id)
-        .setType(classType)
-        .setName(data.name)
-        .setDescription(data.description)
-        .setDuration(data.duration)
-        .setUrl(data.url)
-        .setImage(data.multimedia)
-        .setVideo(data.multimedia)
-        .setArticle(articleState)
-        .setDocument(data.document)
-        .setPosition(position)
-        .build();
+      const templClass = {
+        formData: data,
+        privateState: {
+          id: _id,
+          type: classType,
+          article: articleState,
+          position: position,
+        },
+      };
+
+      // This builds a class model based on the class type
+      const updateClass = buildClassByType(templClass);
 
       let response = await updateClassModule({
         body: updateClass,

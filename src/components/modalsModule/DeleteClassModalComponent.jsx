@@ -14,11 +14,20 @@ const DeleteClassModalComponent = ({ classes, moduleId, updateModules }) => {
       });
       //* Update the module in parent component
       updateModules();
-      //* Alert delete
-      alertSuccess({
-        title: `¡${response}!`,
-        text: `¡${name} fue eliminada exitosamente!`,
-      });
+      // Validate the status of the response before displaying the message on the screen
+      if (response.includes("AxiosError")) {
+        //* Alert Delete error
+        alertError({
+          title: `¡${response}!`,
+          text: `¡${name} no se se pudo modificar!`,
+        });
+      } else {
+        //* Alert Delete
+        alertSuccess({
+          title: `¡${response}!`,
+          text: `¡${name} fue modificado exitosamente!`,
+        });
+      }
     } catch (error) {
       //* Alert Delete error
       alertError({
