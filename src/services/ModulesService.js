@@ -20,7 +20,6 @@ const getModuleById = async (id) => {
   return await axios
     .get(`${environment.backendBaseUrl}modules/findById/${id}`)
     .then((resp) => {
-      console.log(resp.data);
       return resp.data.data;
     })
     .catch((error) => {
@@ -39,19 +38,76 @@ const createModuleAsync = async ({ body }) => {
 };
 
 const deleteModuleByIdAsync = async ({ id }) => {
-  return await axios.delete(`${environment.backendBaseUrl}courses/delete/${id}`);
-}
+  return await axios.delete(
+    `${environment.backendBaseUrl}modules/delete/${id}`
+  );
+};
 
-// const createModule = async (module) => {
-//   const header = {
-//     "Content-Type": "application/json",
-//   };
-//   try {
-//     const APIresponse = await API.post(moduleEndPoint, module, header);
-//     return APIresponse;
-//   } catch (error) {
-//     return null;
-//   }
-// };
 
-export { getModules, getModuleById, createModuleAsync, deleteModuleByIdAsync };
+/**
+ * CRUD classes: Create, Update, Delete
+ */
+
+const createClassModule = async ({ body, moduleId }) => {
+  const header = {
+    "Content-Type": "application/json",
+  };
+  return await axios
+    .post(`${environment.backendBaseUrl}modules/${moduleId}/class`, body, {
+      headers: header,
+    })
+    .then((resp) => {
+      return resp.data.message;
+    })
+    .catch((error) => {
+      // !Delete comment
+      console.log(error);
+      return error;
+    });
+};
+
+const updateClassModule = async ({ body, moduleId }) => {
+  const header = {
+    "Content-Type": "application/json",
+  };
+
+  return await axios
+    .patch(
+      `${environment.backendBaseUrl}modules/${moduleId}/class/${body.get_id}`,
+      body,
+      {
+        headers: header,
+      }
+    )
+    .then((resp) => {
+      return resp.data.message;
+    })
+    .catch((error) => {
+      // !Delete comment
+      console.log(error);
+      return error;
+    });
+};
+
+const deleteClassModule = async ({ classId, moduleId }) => {
+  return await axios
+    .delete(`${environment.backendBaseUrl}modules/${moduleId}/class/${classId}`)
+    .then((resp) => {
+      return resp.data.message;
+    })
+    .catch((error) => {
+      // !Delete comment
+      console.log(error);
+      return error;
+    });
+};
+
+export {
+  getModules,
+  getModuleById,
+  createModuleAsync,
+  deleteModuleByIdAsync,
+  createClassModule,
+  updateClassModule,
+  deleteClassModule,
+};

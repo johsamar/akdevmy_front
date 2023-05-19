@@ -1,19 +1,41 @@
-import React, { useContext } from "react";
-import { AiFillDelete, AiOutlineSearch } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
+import { deleteClassModule } from "../../services/ModulesService";
+import { alertError, alertSuccess } from "../../utils/Alerts";
+import PropTypes from "prop-types";
 
-const DeleteClassComponent = ({ clase1 }) => {
-  const {
-    _id,
-    name,
-    type,
-    description,
-    duration,
-    url,
-    image,
-    video,
-    document,
-    position,
-  } = clase1;
+const DeleteClassModalComponent = ({ classes, moduleId, updateModules }) => {
+  const { _id, name } = classes;
+
+  const deleteClassesModuleFromService = async () => {
+    try {
+      let response = await deleteClassModule({
+        classId: _id,
+        moduleId: moduleId,
+      });
+      //* Update the module in parent component
+      updateModules();
+      // Validate the status of the response before displaying the message on the screen
+      if (response.includes("AxiosError")) {
+        //* Alert Delete error
+        alertError({
+          title: `¡${response}!`,
+          text: `¡${name} no se se pudo modificar!`,
+        });
+      } else {
+        //* Alert Delete
+        alertSuccess({
+          title: `¡${response}!`,
+          text: `¡${name} fue modificado exitosamente!`,
+        });
+      }
+    } catch (error) {
+      //* Alert Delete error
+      alertError({
+        title: "¡Ha ocurrido un error al eliminar la clase!",
+        text: `¡${name} no se se pudo eliminar!`,
+      });
+    }
+  };
 
   return (
     <>
@@ -68,10 +90,15 @@ const DeleteClassComponent = ({ clase1 }) => {
                 type="button"
                 className="btn btn-danger"
                 data-bs-dismiss="modal"
+                onClick={deleteClassesModuleFromService}
               >
                 Eliminar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
                 Cancelar
               </button>
             </div>
@@ -82,4 +109,10 @@ const DeleteClassComponent = ({ clase1 }) => {
   );
 };
 
-export default DeleteClassComponent;
+DeleteClassModalComponent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  moduleId: PropTypes.string.isRequired,
+  updateModules: PropTypes.func.isRequired,
+};
+
+export default DeleteClassModalComponent;

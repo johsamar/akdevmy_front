@@ -23,4 +23,6 @@ function uploadFile(file) {
       return response.json();
     });
   }
+
+  export { uploadFile }
   

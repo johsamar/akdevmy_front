@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { uploadFile } from "../../services/UploadFileService";
 
 function FileUploader() {
   const [file, setFile] = useState(null);
+
+  // Form context
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   function handleFileSelect(event) {
     setFile(event.target.files[0]);
@@ -9,17 +17,17 @@ function FileUploader() {
 
   function handleUpload() {
     uploadFile(file)
-      .then(data => {
+      .then((data) => {
         console.log(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
       });
   }
 
   return (
     <div>
-      <input type="file" onChange={handleFileSelect} />
+      <input type="file" onChange={handleFileSelect} {...register("document")} />
       <button onClick={handleUpload}>Cargar archivo</button>
     </div>
   );
