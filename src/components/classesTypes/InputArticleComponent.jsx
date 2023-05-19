@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import PropTypes from "prop-types";
+import { environment } from "../../config/environment";
 
 /**
- * 
- * @param addArticle:   This function, it's just a way to make the parent 
+ *
+ * @param addArticle:   This function, it's just a way to make the parent
  *                      component receive the value of whatever is entered into the text editor.
- * @param initialValue: It is an optional property that is usually empty, in case of using it, 
+ * @param initialValue: It is an optional property that is usually empty, in case of using it,
  *                      it will simply show a start message in the editor as a kind of placeholder.
- *  
- * @returns A string with the value of the editor. 
+ *
+ * @returns A string with the value of the editor.
  */
 const InputArticleComponent = ({ addArticle, initialValue }) => {
   const [article, setArticle] = useState(initialValue ?? "");
@@ -23,7 +24,7 @@ const InputArticleComponent = ({ addArticle, initialValue }) => {
 
   return (
     <Editor
-      apiKey="060bmtk3hs231s8vk9rw1k20c3bx7gjs2anymf4e3t99h794"
+      apiKey={environment.articleApiKey}
       initialValue={initialValue}
       value={article}
       init={{
@@ -67,7 +68,7 @@ const InputArticleComponent = ({ addArticle, initialValue }) => {
 
 InputArticleComponent.propTypes = {
   addArticle: PropTypes.func.isRequired,
-  initialValue: PropTypes.string
+  initialValue: PropTypes.string,
 };
 
 export default InputArticleComponent;

@@ -20,6 +20,35 @@
     display: flex;
 }
 
-.hidden-button {
-    
+.hidden-button {  
+    border-radius: 80px;
+    background-color: #858b90;
+    color: #ffffff;
+    padding: 15px 15px;
+    position: fixed;
+    top: 20px;
+    transition: all 300ms ease 0ms;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    margin-left: 1%;
+    z-index: 99;
+}
+
+.hidden-button:hover {
+    background-color: rgb(251, 249, 245); /* Color de fondo al pasar el cursor */
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+	transform: translateY(-7px);
+}
+
+@media only screen and (max-width: 600px) {
+    .hidden-button {
+       font-size: 14px;
+       padding: 12px 20px;
+       bottom: 20px;
+       right: 20px;
+   }
+} 
+
+.navBarIcon{
+    width: 50px;
+    height: 50px;
 }

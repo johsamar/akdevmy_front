@@ -2,6 +2,9 @@ import "../styles/GeneralCardComponent.css";
 import { environment } from "../config/environment";
 import { FaReadme, FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { ActionEnum } from "../enums/action";
+import { VscDashboard } from "react-icons/vsc";
+import PropTypes from "prop-types";
 
 /**
  *
@@ -10,7 +13,13 @@ import { useNavigate } from "react-router-dom";
  *                 - If it has a word, the word will be painted on the button.
  *                 - If it does not have anything, the button will not be rendered.
  */
-const GeneralCardComponent = ({ singleElement, options }) => {
+const GeneralCardComponent = ({ 
+  singleElement,
+  options,
+  actionState,
+  changeModalState,
+  selectedObject
+}) => {
   const navigate = useNavigate();
   /**
    * This function is used to send access to the course details path
@@ -18,8 +27,24 @@ const GeneralCardComponent = ({ singleElement, options }) => {
 
   const manageCourse = () => {
     const course = { ...singleElement };
-    navigate(`/misCursos/${course.idCourse}`);
+    navigate(`/misCursos/${course.id}`);
   };
+  const manageModule = () => {
+    const module = { ...singleElement };
+    navigate(`/module/${module._id}`);
+  };
+
+  const update = () =>{
+    actionState(ActionEnum.update);
+    selectedObject(singleElement)
+    changeModalState();
+  }
+
+  const read = () =>{
+    actionState(ActionEnum.read);
+    selectedObject(singleElement)
+    changeModalState();
+  }
 
   return (
     <>
@@ -48,20 +73,22 @@ const GeneralCardComponent = ({ singleElement, options }) => {
             {/*  */}
             {options === "actions" ? (
               <div className="d-flex justify-content-around">
-                <span className="card-edit-actions">
+                <span className="card-edit-actions" onClick={read}>
                   <FaReadme />
                 </span>
-                <span className="card-edit-actions">
+                <span className="card-edit-actions" onClick={update}>
                   <FaRegEdit />
                 </span>
                 <span className="card-edit-actions" onClick={manageCourse}>
-                  M
+                  <VscDashboard />
                 </span>
               </div>
             ) : (
               options && (
                 <div className="d-flex justify-content-end">
-                  <button className="btn btn-primary">{options}</button>
+                  <button className="btn btn-primary" onClick={manageModule}>
+                    {options}
+                  </button>
                 </div>
               )
             )}
@@ -71,5 +98,13 @@ const GeneralCardComponent = ({ singleElement, options }) => {
     </>
   );
 };
+
+GeneralCardComponent.propTypes = {
+  singleElement: PropTypes.object.isRequired,
+  options: PropTypes.string.isRequired ,
+  actionState: PropTypes.func.isRequired,
+  changeModalState: PropTypes.func.isRequired,
+  selectedObject: PropTypes.func.isRequired,
+}
 
 export { GeneralCardComponent };

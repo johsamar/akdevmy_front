@@ -5,16 +5,12 @@ import Estudiantes from "../pages/Estudiantes";
 import NavBar from "../containers/NavBar";
 import "../styles/PageRouter.css";
 import { useState } from "react";
-import { MdArrowCircleLeft, MdArrowCircleRight } from "react-icons/md";
 import CourseDetailsPage from "../pages/CourseDetailsPage";
+import ModuleDetailsPage from "../pages/ModuleDetailsPage";
+import { AiOutlineBars } from "react-icons/ai";
 
 function PageRouter() {
   const [showSideBar, setShowSideBar] = useState(true);
-
-  const iconStyle = {
-    width: "50px",
-    height: "50px",
-  };
 
   const changeSideBarStatus = () => {
     setShowSideBar(!showSideBar);
@@ -35,12 +31,9 @@ function PageRouter() {
             className="routes overflow-auto"
             style={showSideBar ? { marginLeft: "20%" } : { marginRight: "0%" }}
           >
-            <button className="hidden-button btn" onClick={changeSideBarStatus}>
-              {showSideBar ? (
-                <MdArrowCircleLeft style={iconStyle} />
-              ) : (
-                <MdArrowCircleRight style={iconStyle} />
-              )}
+            <button href="#" className="hidden-button btn" onClick={changeSideBarStatus}>
+            {/* navbarIcon */}
+            <AiOutlineBars className="navBarIcon" />
             </button>
             <Routes>
               <Route path="/" element={<Academia />} />
@@ -50,6 +43,11 @@ function PageRouter() {
               <Route
                 path="/misCursos/:idCourse"
                 element={<CourseDetailsPage />}
+              />
+              {/* Esta ruta dirige al detalle del modulo */}
+              <Route
+                path="/module/:idModule"
+                element={<ModuleDetailsPage/>}
               />
               <Route path="*" element={<h1>Not Found 404</h1>} />
             </Routes>
