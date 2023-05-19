@@ -1,7 +1,6 @@
 .column {
   display: flex;
   margin: 25px;
-  height: 425px;
   width: 300px;
   font-size: 2rem;
   background-color: rgb(247, 242, 242);
@@ -53,5 +52,4 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: rgb(247, 242, 242);
-  max-height: 200px;
 }
