@@ -1,34 +1,54 @@
 .column {
-    display: flex;
-    margin: 25px;
-    width: 400px;
+  display: flex;
+  margin: 25px;
+  width: 300px;
+  font-size: 2rem;
 }
 
 .card-edit {
-    border: solid rgb(193, 191, 186) 3px;
+  border: solid rgb(193, 191, 186) 3px;
+  padding: 0.5rem;
 }
 
-.card-edit img{
-    width: 200px;
-    height: 200px;
-    margin: auto;
-    padding-top: 20px;
+.card-edit img {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  padding-top: 20px;
 }
 
-.card-edit-body{
-    text-align: center;
+.card-edit-body {
+  text-align: center;
 }
 
-.card-edit-body h5{
-    font-size: 30px;
-    color: gray;
+.card-edit-body h5 {
+  font-size: 1.2rem;
+  color: gray;
 }
 
-.card-edit-body p{
-    font-size: 20px;
-    color: gray;
+.card-edit-body p {
+  font-size: 1rem;
+  color: gray;
 }
 
 .card-edit-actions {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.card-edit-actions:hover {
+  transform: scale(1.2);
+  transition: transform 300ms;
+}
+
+.card-edit-actions:active {
+  transform: scale(0.8);
+}
+
+.card-body {
+  margin-top: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(247, 242, 242);
 }
